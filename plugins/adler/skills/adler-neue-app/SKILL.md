@@ -64,7 +64,7 @@ gh repo clone adler-schiffe/<name>
 Sag dem Kollegen in einfachen Worten:
 
 1. **Felix muss jetzt den Cluster-PR genehmigen** (Link aus der Antwort). Erst danach legt die Plattform Datenbank, Login und Schlüssel an. Du musst Felix nicht extra Bescheid geben, er sieht den PR im Portal.
-2. **Die App läuft erst nach dem ersten Merge, der einen Release auslöst**, also mit einem PR-Titel vom Typ `feat:` oder `fix:` (auch `perf`, `refactor`, `revert`). Ein PR mit `docs:` oder `chore:` deployt nichts. Bis dahin zeigt `app_status` „noch nicht deployt“. Das ist normal.
+2. **Die App läuft erst nach dem ersten Merge, der einen Release auslöst**, also mit PR-Titel und Commit-Nachricht vom Typ `feat:` oder `fix:` (auch `perf`, `refactor`, `revert`). Ein PR mit `docs:` oder `chore:` deployt nichts. Bis dahin zeigt `app_status` „noch nicht deployt“. Das ist normal.
 3. Fehlende Schlüssel trägt Felix im Portal ein. Bis dahin meldet `app_status` „wartet auf Schlüssel“.
 4. Im neuen Repo zuerst `AGENTS.md` lesen. Dort steht, wie die App aufgebaut ist und wie man lokal startet.
 5. Änderungen ausliefern: Skill `adler-aenderung-ausliefern`.

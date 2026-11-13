@@ -57,7 +57,7 @@ git push -u origin HEAD
 gh pr create --title "feat: add booking form" --body "<was und warum, auf Deutsch>"
 ```
 
-- Der **PR-Titel wird zur Commit-Nachricht** auf `main` und muss ein Conventional Commit sein. Er entscheidet, ob ein Release entsteht. Für eine Änderung, die live gehen soll: `feat:` oder `fix:`.
+- **Commit-Nachrichten und PR-Titel** müssen Conventional Commits sein, Hook und CI prüfen beides. Beim Squash-Merge nimmt GitHub bei mehreren Commits den PR-Titel als Commit-Nachricht auf `main`, bei einem einzelnen Commit dessen Nachricht. Diese Nachricht entscheidet, ob ein Release entsteht. Für eine Änderung, die live gehen soll: Titel und Commits mit `feat:` oder `fix:`.
 - Im Body kurz beschreiben, was sich ändert. Migrationen mit `DROP`, Typänderung oder `NOT NULL` ohne Default begründen. Chart-Änderungen begründen.
 - Gib dem Kollegen den Link zum PR.
 
