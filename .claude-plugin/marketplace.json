@@ -1,0 +1,12 @@
+{
+  "name": "adler-schiffe",
+  "description": "Plugins für Adler-Schiffe",
+  "owner": { "name": "Adler-Schiffe" },
+  "plugins": [
+    {
+      "name": "adler",
+      "source": "./plugins/adler",
+      "description": "Verbindung zur Adler-Plattform: eigene Apps anmelden, ausliefern und Probleme klären"
+    }
+  ]
+}

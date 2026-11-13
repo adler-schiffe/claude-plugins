@@ -1,0 +1,5 @@
+{
+  "name": "claude-plugins",
+  "private": true,
+  "scripts": { "test": "bun test" }
+}
