@@ -16,7 +16,7 @@ Rufe `meine_apps` auf (keine Eingabe). Scheitert das (401, Werkzeug fehlt, „Da
 Frag die Punkte einzeln und in einfachen Worten. Mach Vorschläge, der Kollege entscheidet.
 
 1. **Zweck:** Was soll die App können? Wer benutzt sie? Daraus leitest du die übrigen Vorschläge ab.
-2. **Name** (`name`): englisch, kebab-case, nur `a-z`, Ziffern und `-`, beginnt mit einem Buchstaben, 3 bis 40 Zeichen, z. B. `svg-sonderfahrten`. Der Name ist zugleich Repo-Name und Teil der Adresse. Er lässt sich später nicht ändern.
+2. **Name** (`name`): englisch, kebab-case, nur `a-z`, Ziffern und `-`, beginnt mit einem Buchstaben, endet mit Buchstabe oder Ziffer, 3 bis 40 Zeichen, z. B. `svg-sonderfahrten`. Der Name ist zugleich Repo-Name und Teil der Adresse. Er lässt sich später nicht ändern.
 3. **Titel** (`titel`): deutsch, so wie Benutzer die App sehen, höchstens 100 Zeichen, z. B. „Sonderfahrten-Anfragen“.
 4. **Rollen** (`rollen`): Gruppen von Benutzern mit unterschiedlichen Rechten. Jede Rolle passt zu `[a-z][a-z0-9_]*` (Kleinbuchstaben, Ziffern, Unterstrich). Empfehlung: Präfix aus dem App-Namen, z. B. `sonderfahrten_buero`, `sonderfahrten_heim`. Ohne Rollen gibt es trotzdem einen Login. Mitglieder trägt Felix später ein.
 5. **Datenbank** (`datenbank`): ja oder nein. Ja, sobald die App etwas speichern soll.
