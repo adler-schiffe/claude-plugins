@@ -4,32 +4,39 @@ Marketplace `adler-schiffe` mit dem Plugin `adler`. Das Plugin verbindet Claude 
 
 ## Installation für Kollegen
 
-1. Token erzeugen: <https://platform.app.adler-schiffe.de/tokens> (Login mit Authentik, Gruppe `platform_developer`).
-2. Token als Umgebungsvariable `ADLER_MCP_TOKEN` setzen, und zwar in einem Editor, nie per `echo` im Terminal (sonst landet er im Verlauf): macOS: `~/.zshrc` öffnen (`touch ~/.zshrc && open -e ~/.zshrc`), am Ende die Zeile `export ADLER_MCP_TOKEN=<hier den Token einfügen>` ergänzen (ohne Anführungszeichen), speichern. Windows: über „Umgebungsvariablen für dieses Konto bearbeiten“ eine Benutzervariable `ADLER_MCP_TOKEN` anlegen, nicht per `setx`. Terminal neu öffnen und Claude Code neu starten, damit es die Variable sieht. Den Token nie anzeigen, nie in den Chat kopieren, nie teilen oder in ein Repo schreiben. Ist er doch irgendwo gelandet: unter `/tokens` löschen und neu erzeugen. Der Skill `adler-onboarding` führt genauso durch.
-3. In Claude Code:
+Die Schritt-für-Schritt-Anleitung steht im Handbuch: <https://platform.app.adler-schiffe.de/guide#einrichtung>. Kurz:
+
+1. Token erzeugen: <https://platform.app.adler-schiffe.de/tokens> (Login mit Authentik, Gruppe `platform_developer`). Er wird nur einmal angezeigt.
+2. In Claude Code:
    ```text
    /plugin marketplace add adler-schiffe/claude-plugins
    /plugin install adler@adler-schiffe
    ```
-4. Mit `/mcp` prüfen, dass `plugin:adler:adler` verbunden ist.
+   Claude Code fragt nach dem **MCP-Token** (verdecktes Feld): einfügen, Enter. Der Token liegt danach im sicheren Speicher des Betriebssystems, nicht in einer Datei.
+3. Claude Code neu starten (`/exit`, dann `claude`) und sagen: „Richte mich für die Adler-Plattform ein.“ Der Skill `adler-onboarding` installiert Git, GitHub CLI, Bun und Docker, verbindet GitHub und prüft die MCP-Verbindung.
 
-Ist die Variable nicht gesetzt, schlägt die Verbindung fehl (401). Der Skill `adler-onboarding` hilft dann weiter.
+Token ersetzen (verloren, gelöscht, 401): neuen Token unter `/tokens` erzeugen, in Claude Code `/plugin configure adler@adler-schiffe` tippen und einfügen. Den Token nie in den Chat kopieren, nie teilen oder in ein Repo schreiben.
 
 ## Inhalt
 
 - `.claude-plugin/marketplace.json`: Marketplace-Katalog
-- `plugins/adler/.mcp.json`: HTTP-MCP-Server `adler`, Token aus `ADLER_MCP_TOKEN`
+- `plugins/adler/.mcp.json`: HTTP-MCP-Server `adler`, Token aus der Plugin-Einstellung `mcp_token` (`userConfig` in `plugin.json`)
 - `plugins/adler/skills/`: `adler-onboarding`, `adler-neue-app`, `adler-aenderung-ausliefern`, `adler-problem`
 
 ## Test
 
 ```sh
 bun test
+claude plugin validate plugins/adler
 ```
+
+## Version
+
+`version` in `plugins/adler/.claude-plugin/plugin.json` bei jeder Änderung am Plugin erhöhen (SemVer). Claude Code erkennt Updates an der Version; ohne Erhöhung bekommen Kollegen die Änderung nicht.
 
 ## Hinweis an Felix: Sichtbarkeit des Repos
 
-Die Org-Basisrechte sind „No permission“. Kollegen können dieses Repo nur hinzufügen, wenn sie es lesen dürfen. Entweder das Repo öffentlich machen (es enthält keine Secrets, nur den Token-Platzhalter `${ADLER_MCP_TOKEN}`) oder dem Kollegen-Team Lesezugriff geben.
+Die Org-Basisrechte sind „No permission“. Kollegen können dieses Repo nur hinzufügen, wenn sie es lesen dürfen. Entweder das Repo öffentlich machen (es enthält keine Secrets, nur den Token-Platzhalter `${user_config.mcp_token}`) oder dem Kollegen-Team Lesezugriff geben.
 
 ## Hinweis an Felix: Schutz von `main`
 
