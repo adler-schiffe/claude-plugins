@@ -9,13 +9,15 @@ Du hilfst einem Kollegen, der kein Entwickler ist. Sprich einfach und freundlich
 
 ## Ablauf
 
+Stelle zuerst fest, ob der Kollege macOS oder Windows nutzt (deine Umgebung zeigt das an, sonst frag nach). Viele Schritte unterscheiden sich, gib immer nur die Anleitung für sein System. Das Handbuch <https://platform.app.adler-schiffe.de/guide#einrichtung> zeigt beide Varianten.
+
 ### 1. GitHub-Login
 
 ```sh
 gh auth status
 ```
 
-- Nicht angemeldet oder `gh` fehlt: `brew install gh`, dann `gh auth login` (GitHub.com, HTTPS, im Browser anmelden). Der Kollege macht das selbst im Terminal.
+- Nicht angemeldet oder `gh` fehlt: installieren (macOS: `brew install gh`, Windows: `winget install --id GitHub.cli --source winget`, danach ein neues Terminal-Fenster öffnen), dann `gh auth login` (GitHub.com, HTTPS, im Browser anmelden). Der Kollege macht das selbst im Terminal.
 - Nie `--show-token` verwenden.
 
 ### 2. Mitglied der Org `adler-schiffe`
@@ -39,6 +41,12 @@ Prüfe nur, ob die Variable gesetzt ist. Gib den Wert nie aus:
 [ -n "${ADLER_MCP_TOKEN:-}" ] && echo gesetzt || echo fehlt
 ```
 
+Unter Windows ohne Bash (PowerShell):
+
+```powershell
+if ($env:ADLER_MCP_TOKEN) { "gesetzt" } else { "fehlt" }
+```
+
 Wichtig: Claude Code liest die Variable beim Start. Fehlt sie dort, schickt Claude Code den Text `${ADLER_MCP_TOKEN}` statt des Tokens, und jeder MCP-Aufruf scheitert mit 401 (nicht angemeldet). Zeigt der Befehl `gesetzt`, aber die Werkzeuge melden trotzdem 401, wurde die Variable meist erst nach dem Start von Claude Code gesetzt. Dann Claude Code beenden und neu starten. Hilft das nicht, ist der Token ungültig oder gelöscht: neuen Token erzeugen (Schritte unten).
 
 Fehlt die Variable, erkläre diese Schritte. Der Kollege macht sie selbst:
@@ -47,20 +55,22 @@ Fehlt die Variable, erkläre diese Schritte. Der Kollege macht sie selbst:
 2. Ein Token erzeugen. Es wird genau einmal angezeigt. Es gehört nur dem Kollegen.
    - Meldung „GitHub-Login fehlt in Authentik, bitte Felix fragen“: Das kann nur Felix (Attribut `github` am Benutzer).
    - Kein Zugriff auf die Seite: Die Gruppe `platform_developer` fehlt. Das kann nur Felix.
-3. Die Datei `~/.zshrc` in einem Editor öffnen, damit der Token nicht im Terminal-Verlauf landet:
-   ```sh
-   touch ~/.zshrc && open -e ~/.zshrc
-   ```
-4. Am Ende eine neue Zeile einfügen und den Token dort selbst einsetzen, ohne Anführungszeichen (TextEdit macht sonst manchmal typografische Anführungszeichen daraus):
-   ```text
-   export ADLER_MCP_TOKEN=<hier den Token einfügen>
-   ```
-   Speichern und den Editor schließen.
-5. Claude Code beenden, ein **neues** Terminal-Fenster öffnen und `claude` dort neu starten. Dann diesen Skill noch einmal ausführen.
+3. Den Token speichern, ohne dass er im Terminal-Verlauf landet:
+   - **macOS:** Die Datei `~/.zshrc` im Editor öffnen:
+     ```sh
+     touch ~/.zshrc && open -e ~/.zshrc
+     ```
+     Am Ende eine neue Zeile einfügen und den Token dort selbst einsetzen, ohne Anführungszeichen (TextEdit macht sonst manchmal typografische Anführungszeichen daraus):
+     ```text
+     export ADLER_MCP_TOKEN=<hier den Token einfügen>
+     ```
+     Speichern und den Editor schließen.
+   - **Windows:** Windows-Taste drücken, „Umgebungsvariablen“ tippen, *Umgebungsvariablen für dieses Konto bearbeiten* öffnen. Unter Benutzervariablen *Neu…* klicken, Name `ADLER_MCP_TOKEN`, als Wert den Token einfügen (ohne Anführungszeichen), zweimal *OK*. Nicht `setx` im Terminal verwenden, sonst steht der Token im Befehlsverlauf.
+4. Claude Code beenden, **alle** Terminal-Fenster schließen, ein neues öffnen und `claude` dort neu starten. Dann diesen Skill noch einmal ausführen.
 
-Der Token kommt **nie** in den Chat, in eine Datei im Repo oder in einen Befehl, den du ausführst. Du schreibst ihn auch nicht selbst in `~/.zshrc`. Bietet der Kollege an, ihn in den Chat zu kopieren, lehne ab und verweise auf den Editor. Ist er doch im Chat gelandet: Der Kollege löscht ihn unter `/tokens` und erzeugt einen neuen.
+Der Token kommt **nie** in den Chat, in eine Datei im Repo oder in einen Befehl, den du ausführst. Du schreibst ihn auch nicht selbst in `~/.zshrc` oder in die Umgebungsvariablen. Bietet der Kollege an, ihn in den Chat zu kopieren, lehne ab und verweise auf Editor bzw. Umgebungsvariablen. Ist er doch im Chat gelandet: Der Kollege löscht ihn unter `/tokens` und erzeugt einen neuen.
 
-Der Token merkt sich Gruppen und GitHub-Login zum Zeitpunkt der Erstellung. Hat Felix danach etwas geändert (Gruppe `platform_developer`, Attribut `github`), braucht der Kollege einen neuen Token. Den alten Eintrag in `~/.zshrc` dann im Editor ersetzen.
+Der Token merkt sich Gruppen und GitHub-Login zum Zeitpunkt der Erstellung. Hat Felix danach etwas geändert (Gruppe `platform_developer`, Attribut `github`), braucht der Kollege einen neuen Token. Den alten Wert dann ersetzen (macOS: in `~/.zshrc` im Editor, Windows: in den Umgebungsvariablen über *Bearbeiten…*).
 
 ### 4. MCP-Verbindung
 
@@ -78,7 +88,10 @@ Rufe das Werkzeug `meine_apps` des MCP-Servers `adler` auf (keine Eingabe).
 bun --version
 ```
 
-Fehlt Bun: `curl -fsSL https://bun.sh/install | bash`, danach ein neues Terminal öffnen.
+Fehlt Bun, installieren und danach ein neues Terminal öffnen:
+
+- macOS: `curl -fsSL https://bun.sh/install | bash`
+- Windows (PowerShell): `powershell -c "irm bun.sh/install.ps1|iex"`
 
 ### 6. Docker
 
@@ -86,7 +99,7 @@ Fehlt Bun: `curl -fsSL https://bun.sh/install | bash`, danach ein neues Terminal
 docker info --format '{{.ServerVersion}}'
 ```
 
-- Fehlt Docker: Docker Desktop installieren (<https://www.docker.com/products/docker-desktop/>).
+- Fehlt Docker: Docker Desktop installieren (<https://www.docker.com/products/docker-desktop/>). Unter Windows fragt die Installation nach WSL 2: bestätigen und neu starten, wenn Windows danach fragt.
 - Docker ist installiert, aber der Befehl scheitert: Docker Desktop starten und warten, bis es läuft.
 
 Docker braucht man nur, um eine App lokal mit Datenbank zu starten.
@@ -126,7 +139,7 @@ Sag dem Kollegen, dass er startklar ist. Nächster Schritt: eine neue App anmeld
 
 ## Nie
 
-- Den Token ausgeben, anzeigen, in den Chat holen oder selbst in eine Datei schreiben. Kein `echo $ADLER_MCP_TOKEN`, kein `env`, kein `printenv`, kein `cat ~/.zshrc`.
+- Den Token ausgeben, anzeigen, in den Chat holen oder selbst in eine Datei schreiben. Kein `echo $ADLER_MCP_TOKEN`, kein `env`, kein `printenv`, kein `cat ~/.zshrc`, unter Windows kein `$env:ADLER_MCP_TOKEN`, kein `Get-ChildItem env:`, kein `[Environment]::GetEnvironmentVariable`.
 - Secrets oder `.env`-Dateien lesen.
 - `ssh`, `kubectl`, `helm` oder `flux` verwenden. Kollegen brauchen keinen Cluster-Zugang.
 - Eine Mail an Felix schreiben oder etwas selbst verschicken. Einzige Ausnahme: die vorformulierte Nachricht oben, die der Kollege selbst schickt, solange der MCP nicht geht oder es noch keine App gibt.

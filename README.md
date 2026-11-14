@@ -5,7 +5,7 @@ Marketplace `adler-schiffe` mit dem Plugin `adler`. Das Plugin verbindet Claude 
 ## Installation für Kollegen
 
 1. Token erzeugen: <https://platform.app.adler-schiffe.de/tokens> (Login mit Authentik, Gruppe `platform_developer`).
-2. Token als Umgebungsvariable `ADLER_MCP_TOKEN` setzen, und zwar in einem Editor, nie per `echo` im Terminal (sonst landet er im Verlauf): `~/.zshrc` öffnen (`touch ~/.zshrc && open -e ~/.zshrc`), am Ende die Zeile `export ADLER_MCP_TOKEN=<hier den Token einfügen>` ergänzen (ohne Anführungszeichen), speichern. Terminal neu öffnen und Claude Code neu starten, damit es die Variable sieht. Den Token nie anzeigen, nie in den Chat kopieren, nie teilen oder in ein Repo schreiben. Ist er doch irgendwo gelandet: unter `/tokens` löschen und neu erzeugen. Der Skill `adler-onboarding` führt genauso durch.
+2. Token als Umgebungsvariable `ADLER_MCP_TOKEN` setzen, und zwar in einem Editor, nie per `echo` im Terminal (sonst landet er im Verlauf): macOS: `~/.zshrc` öffnen (`touch ~/.zshrc && open -e ~/.zshrc`), am Ende die Zeile `export ADLER_MCP_TOKEN=<hier den Token einfügen>` ergänzen (ohne Anführungszeichen), speichern. Windows: über „Umgebungsvariablen für dieses Konto bearbeiten“ eine Benutzervariable `ADLER_MCP_TOKEN` anlegen, nicht per `setx`. Terminal neu öffnen und Claude Code neu starten, damit es die Variable sieht. Den Token nie anzeigen, nie in den Chat kopieren, nie teilen oder in ein Repo schreiben. Ist er doch irgendwo gelandet: unter `/tokens` löschen und neu erzeugen. Der Skill `adler-onboarding` führt genauso durch.
 3. In Claude Code:
    ```text
    /plugin marketplace add adler-schiffe/claude-plugins
