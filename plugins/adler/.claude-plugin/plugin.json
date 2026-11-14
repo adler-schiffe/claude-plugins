@@ -1,5 +1,15 @@
 {
   "name": "adler",
+  "version": "0.2.0",
   "description": "Verbindung zur Adler-Plattform und Anleitungen für Kollegen",
-  "author": { "name": "Adler-Schiffe" }
+  "author": { "name": "Adler-Schiffe" },
+  "userConfig": {
+    "mcp_token": {
+      "type": "string",
+      "title": "MCP-Token",
+      "description": "Dein persönlicher Token für die Adler-Plattform. Erzeugen unter https://platform.app.adler-schiffe.de/tokens (wird nur einmal angezeigt).",
+      "required": true,
+      "sensitive": true
+    }
+  }
 }

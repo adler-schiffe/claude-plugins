@@ -23,14 +23,23 @@ describe("marketplace", () => {
 });
 
 describe("plugin", () => {
-  test("plugin.json name", () => {
-    expect(readJson("plugins/adler/.claude-plugin/plugin.json").name).toBe("adler");
+  const manifest = readJson("plugins/adler/.claude-plugin/plugin.json");
+  test("plugin.json name and version", () => {
+    expect(manifest.name).toBe("adler");
+    expect(manifest.version).toMatch(/^\d+\.\d+\.\d+$/);
+  });
+  test("mcp_token is a required, sensitive user option", () => {
+    const o = manifest.userConfig?.mcp_token;
+    expect(o?.type).toBe("string");
+    expect(o?.required).toBe(true);
+    expect(o?.sensitive).toBe(true);
+    expect(o?.description).toContain("https://platform.app.adler-schiffe.de/tokens");
   });
   test(".mcp.json server adler", () => {
     const s = readJson("plugins/adler/.mcp.json").mcpServers.adler;
     expect(s.type).toBe("http");
     expect(s.url).toBe("https://platform.app.adler-schiffe.de/mcp");
-    expect(s.headers.Authorization).toBe("Bearer ${ADLER_MCP_TOKEN}");
+    expect(s.headers.Authorization).toBe("Bearer ${user_config.mcp_token}");
   });
 });
 

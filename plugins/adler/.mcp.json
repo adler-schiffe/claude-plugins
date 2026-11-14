@@ -4,7 +4,7 @@
       "type": "http",
       "url": "https://platform.app.adler-schiffe.de/mcp",
       "headers": {
-        "Authorization": "Bearer ${ADLER_MCP_TOKEN}"
+        "Authorization": "Bearer ${user_config.mcp_token}"
       }
     }
   }
