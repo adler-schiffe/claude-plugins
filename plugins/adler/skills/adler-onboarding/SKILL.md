@@ -46,7 +46,7 @@ Fehlt die Variable, erkläre diese Schritte. Der Kollege macht sie selbst:
 1. <https://platform.app.adler-schiffe.de/tokens> im Browser öffnen und mit dem Adler-Login (Authentik) anmelden.
 2. Ein Token erzeugen. Es wird genau einmal angezeigt. Es gehört nur dem Kollegen.
    - Meldung „GitHub-Login fehlt in Authentik, bitte Felix fragen“: Das kann nur Felix (Attribut `github` am Benutzer).
-   - Kein Zugriff auf die Seite: Die Gruppe `adler-entwickler` fehlt. Das kann nur Felix.
+   - Kein Zugriff auf die Seite: Die Gruppe `platform_developer` fehlt. Das kann nur Felix.
 3. Die Datei `~/.zshrc` in einem Editor öffnen, damit der Token nicht im Terminal-Verlauf landet:
    ```sh
    touch ~/.zshrc && open -e ~/.zshrc
@@ -60,7 +60,7 @@ Fehlt die Variable, erkläre diese Schritte. Der Kollege macht sie selbst:
 
 Der Token kommt **nie** in den Chat, in eine Datei im Repo oder in einen Befehl, den du ausführst. Du schreibst ihn auch nicht selbst in `~/.zshrc`. Bietet der Kollege an, ihn in den Chat zu kopieren, lehne ab und verweise auf den Editor. Ist er doch im Chat gelandet: Der Kollege löscht ihn unter `/tokens` und erzeugt einen neuen.
 
-Der Token merkt sich Gruppen und GitHub-Login zum Zeitpunkt der Erstellung. Hat Felix danach etwas geändert (Gruppe `adler-entwickler`, Attribut `github`), braucht der Kollege einen neuen Token. Den alten Eintrag in `~/.zshrc` dann im Editor ersetzen.
+Der Token merkt sich Gruppen und GitHub-Login zum Zeitpunkt der Erstellung. Hat Felix danach etwas geändert (Gruppe `platform_developer`, Attribut `github`), braucht der Kollege einen neuen Token. Den alten Eintrag in `~/.zshrc` dann im Editor ersetzen.
 
 ### 4. MCP-Verbindung
 
@@ -68,7 +68,7 @@ Rufe das Werkzeug `meine_apps` des MCP-Servers `adler` auf (keine Eingabe).
 
 - Antwort ist eine Liste oder „Du hast noch keine Apps.“: Die Verbindung steht.
 - 401 oder „nicht angemeldet“: zurück zu Schritt 3.
-- „Dafür fehlt dir die Berechtigung (Gruppe adler-entwickler)“: Das kann nur Felix. Danach braucht der Kollege einen neuen Token.
+- „Dafür fehlt dir die Berechtigung (Gruppe platform_developer)“: Das kann nur Felix. Danach braucht der Kollege einen neuen Token.
 - Das Werkzeug gibt es gar nicht: Das Plugin `adler` ist nicht installiert oder der Server ist nicht verbunden. Der Kollege prüft in Claude Code mit `/mcp`, ob `plugin:adler:adler` verbunden ist, und sonst mit `/plugin`, ob `adler@adler-schiffe` installiert ist.
 - Fehler beim Hinzufügen des Marketplace `adler-schiffe/claude-plugins` (Repo nicht gefunden): Der Kollege hat keinen Lesezugriff auf das Repo. Das kann nur Felix.
 
@@ -94,7 +94,7 @@ Docker braucht man nur, um eine App lokal mit Datenbank zu starten.
 ## Was nur Felix kann
 
 - Einladung in die GitHub-Org `adler-schiffe`
-- Gruppe `adler-entwickler` in Authentik
+- Gruppe `platform_developer` in Authentik
 - Attribut `github` (GitHub-Login) am Authentik-Benutzer
 - Lesezugriff auf das Repo `adler-schiffe/claude-plugins`
 
@@ -112,7 +112,7 @@ So meldest du es:
   ```text
   Hallo Felix, ich richte die Adler-Plattform ein. Es fehlt noch:
   - <Punkt, z. B. Einladung in die GitHub-Org adler-schiffe>
-  - <Punkt, z. B. Gruppe adler-entwickler und Attribut github in Authentik>
+  - <Punkt, z. B. Gruppe platform_developer und Attribut github in Authentik>
   Mein GitHub-Login: <login aus gh auth status>
   Mein Adler-Login (Authentik): <Benutzername>
   Danke!
