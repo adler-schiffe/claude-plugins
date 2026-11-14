@@ -53,9 +53,10 @@ Typische Fehler:
 
 ## 4. Repo klonen
 
-Die Antwort enthält die Repo-URL und die URL des Cluster-PR. Klone das Repo in einen passenden Ordner (frag, wo; Vorschlag `~/Projekte`):
+Die Antwort enthält die Repo-URL und die URL des Cluster-PR. Klone das Repo in den Ordner `~/Apps` (legt das Onboarding an; fehlt er, lege ihn an). Die Befehle klappen unter macOS und Windows:
 
 ```sh
+cd ~/Apps
 gh repo clone adler-schiffe/<name>
 ```
 
