@@ -1,6 +1,6 @@
 # claude-plugins (Adler-Schiffe)
 
-Marketplace `adler-schiffe` mit dem Plugin `adler`. Das Plugin verbindet Claude Code mit der Adler-Plattform (MCP-Endpunkt `https://platform.app.adler-schiffe.de/mcp`) und bringt Anleitungen (Skills) für Kollegen mit.
+Marketplace `adler-schiffe` mit dem Plugin `adler`. Das Plugin verbindet Claude Code mit der Adler-Plattform (MCP-Endpunkt `https://platform.app.adler-schiffe.de/mcp`) und bringt Anleitungen (Skills) für Kollegen mit. Apps gibt es für zwei Unternehmen: Adler-Schiffe (`<app>.app.adler-schiffe.de`) und SVG Busreisen (`<app>.app.svg-busreisen.de`); `adler-neue-app` fragt danach.
 
 ## Installation für Kollegen
 

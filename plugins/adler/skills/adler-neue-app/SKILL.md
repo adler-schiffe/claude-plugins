@@ -25,9 +25,12 @@ Frag die Punkte einzeln und in einfachen Worten. Mach Vorschläge, der Kollege e
    - `beschreibung`: wofür, 1 bis 500 Zeichen
 
    Nicht erlaubt (setzt die Plattform selbst): `DATABASE_URL`, `OIDC_ISSUER`, `OIDC_CLIENT_ID`, `OIDC_CLIENT_SECRET`, `SESSION_SECRET`, `APP_URL`, `PORT`. Frag nie nach dem Wert eines Schlüssels. Den Wert trägt Felix später im Portal ein.
-7. **Host** (`host`): Standard ist `<name>.app.adler-schiffe.de`. Nur wenn der Kollege etwas anderes will: Er muss mit dem App-Namen beginnen (`<name>.app.adler-schiffe.de` oder `<name>-….app.adler-schiffe.de`). Beim Standard das Feld weglassen.
+7. **Unternehmen** (`unternehmen`): Frag, wenn es aus dem Gespräch nicht klar ist: „Für welches Unternehmen baust du die App, Adler-Schiffe oder SVG Busreisen?“ Nicht aus der Person oder dem App-Namen raten (z. B. `svg-sonderfahrten` kann trotzdem eine Adler-App sein).
+   - Adler-Schiffe: `adler`, Adresse `<name>.app.adler-schiffe.de`, Login über `auth.app.adler-schiffe.de`
+   - SVG Busreisen: `svg`, Adresse `<name>.app.svg-busreisen.de`, Login über `auth.app.svg-busreisen.de`
+8. **Host** (`host`): Standard ist `<name>.<Domain des Unternehmens>`. Nur wenn der Kollege etwas anderes will: Er muss mit dem App-Namen beginnen (`<name>.…` oder `<name>-….`) und auf der Domain des gewählten Unternehmens enden. Beim Standard das Feld weglassen.
 
-Fass alles kurz zusammen und lass es bestätigen.
+Fass alles kurz zusammen (mit Unternehmen und Adresse) und lass es bestätigen.
 
 ## 3. Anmelden
 
@@ -37,6 +40,7 @@ Werkzeug `app_anmelden` mit:
 |---|---|---|
 | `name` | ja | App-Name |
 | `titel` | ja | Titel |
+| `unternehmen` | nein | `adler` (Standard) oder `svg`; immer setzen, wenn der Kollege SVG gewählt hat |
 | `host` | nein | nur bei abweichendem Host |
 | `datenbank` | nein | `true` oder `false` (Standard `false`) |
 | `rollen` | nein | Liste, Standard leer |
@@ -49,6 +53,7 @@ Typische Fehler:
 - „ist kein Mitglied der GitHub-Organisation adler-schiffe“, „kein gültiger GitHub-Benutzername“ oder „bitte Onboarding bei Felix abschließen“: Onboarding fehlt. Wechsle zum Skill `adler-onboarding`.
 - Name reserviert oder schon vergeben: anderen Namen vorschlagen und erneut fragen.
 - Host vergeben oder reserviert: Standard-Host nehmen oder anderen vorschlagen.
+- „Host muss auf … enden (Unternehmen …)“: Host und Unternehmen passen nicht zusammen. Host weglassen (Standard des Unternehmens) oder Unternehmen klären.
 - „Ungültige Eingabe (…)“: Feld laut Meldung korrigieren.
 
 ## 4. Repo klonen
@@ -67,8 +72,9 @@ Sag dem Kollegen in einfachen Worten:
 1. **Felix muss jetzt den Cluster-PR genehmigen** (Link aus der Antwort). Erst danach legt die Plattform Datenbank, Login und Schlüssel an. Du musst Felix nicht extra Bescheid geben, er sieht den PR im Portal.
 2. **Die App läuft erst nach dem ersten Merge, der einen Release auslöst**, also mit PR-Titel und Commit-Nachricht vom Typ `feat:` oder `fix:` (auch `perf`, `refactor`, `revert`). Ein PR mit `docs:` oder `chore:` deployt nichts. Bis dahin zeigt `app_status` „noch nicht deployt“. Das ist normal.
 3. Fehlende Schlüssel trägt Felix im Portal ein. Bis dahin meldet `app_status` „wartet auf Schlüssel“.
-4. Im neuen Repo zuerst `AGENTS.md` lesen. Dort steht, wie die App aufgebaut ist und wie man lokal startet.
-5. Änderungen ausliefern: Skill `adler-aenderung-ausliefern`.
+4. Die App ist später unter der Adresse aus der Antwort erreichbar (Adler: `.app.adler-schiffe.de`, SVG: `.app.svg-busreisen.de`). Nenne sie dem Kollegen.
+5. Im neuen Repo zuerst `AGENTS.md` lesen. Dort steht, wie die App aufgebaut ist und wie man lokal startet.
+6. Änderungen ausliefern: Skill `adler-aenderung-ausliefern`.
 
 Öffne danach `AGENTS.md` im geklonten Repo und richte dich bei der weiteren Arbeit danach.
 
