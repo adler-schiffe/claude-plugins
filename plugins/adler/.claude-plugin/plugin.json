@@ -1,6 +1,6 @@
 {
   "name": "adler",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Verbindung zur Adler-Plattform und Anleitungen für Kollegen",
   "author": { "name": "Adler-Schiffe" },
   "userConfig": {

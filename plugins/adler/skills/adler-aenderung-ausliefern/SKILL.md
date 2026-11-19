@@ -1,6 +1,6 @@
 ---
 name: adler-aenderung-ausliefern
-description: Liefert eine Änderung an einer App auf der Adler-Plattform aus, mit Branch, kleinen Conventional Commits, Prüfungen, Pull Request, Copilot-Kommentaren, Felix' Freigabe und Kontrolle per app_status. Verwenden, wenn eine Änderung fertig ist oder live gehen soll, z. B. „ausliefern“, „veröffentlichen“, „live stellen“, „deployen“, „Pull Request machen“, „PR erstellen“, „hochladen“, „Änderung fertig“.
+description: Liefert eine Änderung an einer App auf der Adler-Plattform aus, mit Spec und Plan, Branch, kleinen Conventional Commits, Prüfungen, Pull Request, Copilot-Kommentaren, Felix' Freigabe und Kontrolle per app_status. Verwenden, wenn eine Änderung fertig ist oder live gehen soll, z. B. „ausliefern“, „veröffentlichen“, „live stellen“, „deployen“, „Pull Request machen“, „PR erstellen“, „hochladen“, „Änderung fertig“.
 ---
 
 # Änderung ausliefern
@@ -8,6 +8,16 @@ description: Liefert eine Änderung an einer App auf der Adler-Plattform aus, mi
 Jede Änderung geht über einen Pull Request. Felix genehmigt und mergt. Danach läuft der Release automatisch und Flux deployt die neue Version. Erkläre dem Kollegen jeden Schritt kurz in einfachen Worten.
 
 Gilt im Repo der App (`adler-schiffe/<app>`). Lies dort `AGENTS.md`, falls noch nicht geschehen.
+
+## 0. Spec und Plan
+
+Bei einer neuen Funktion oder einer größeren Änderung gilt: erst klären, dann planen, dann bauen.
+
+1. **Spec:** Mit dem Kollegen klären, was gebaut werden soll und warum (Skill `superpowers:brainstorming`, falls installiert). Ergebnis als `docs/superpowers/specs/JJJJ-MM-TT-<thema>-design.md` ablegen und vom Kollegen freigeben lassen.
+2. **Plan:** Daraus den Umsetzungsplan als `docs/superpowers/plans/JJJJ-MM-TT-<thema>.md` schreiben (Skill `superpowers:writing-plans`).
+3. **Umsetzen:** Tests zuerst, dann der Code, in kleinen Commits (Schritt 2).
+
+Bei Kleinkram (Tippfehler, Text, kleiner Fix) reicht die Absprache im Chat, ohne Dateien. Spec und Plan kommen mit in den PR.
 
 ## 1. Branch
 
@@ -51,6 +61,8 @@ bun run build
 Alles muss grün sein. Fehler zuerst beheben. Wenn der Kollege Docker laufen hat und die Oberfläche geändert wurde, zusätzlich `bun run test:e2e`.
 
 ## 4. Pull Request
+
+Vorher prüfen: Ist es eine neue Funktion oder größere Änderung, muss eine Spec in `docs/superpowers/specs/` dazu im Branch liegen. Fehlt sie, erst nachholen (Schritt 0) und mit dem Kollegen abstimmen, dann den PR öffnen. Im PR-Body auf Spec und Plan verlinken.
 
 ```sh
 git push -u origin HEAD

@@ -74,7 +74,8 @@ Sag dem Kollegen in einfachen Worten:
 3. Fehlende Schlüssel trägt Felix im Portal ein. Bis dahin meldet `app_status` „wartet auf Schlüssel“.
 4. Die App ist später unter der Adresse aus der Antwort erreichbar (Adler: `.app.adler-schiffe.de`, SVG: `.app.svg-busreisen.de`). Nenne sie dem Kollegen.
 5. Im neuen Repo zuerst `AGENTS.md` lesen. Dort steht, wie die App aufgebaut ist und wie man lokal startet.
-6. Änderungen ausliefern: Skill `adler-aenderung-ausliefern`.
+6. **Erst planen, dann bauen:** Bevor Code entsteht, gemeinsam klären, was die App können soll, und das als Spec in `docs/superpowers/specs/` festhalten, danach den Plan in `docs/superpowers/plans/` (Skills `superpowers:brainstorming` und `superpowers:writing-plans`, falls installiert). Details im Skill `adler-aenderung-ausliefern`, Schritt 0.
+7. Änderungen ausliefern: Skill `adler-aenderung-ausliefern`.
 
 Öffne danach `AGENTS.md` im geklonten Repo und richte dich bei der weiteren Arbeit danach.
 
